@@ -1,5 +1,5 @@
 [submodule "raylib-sys/raylib"]
 	path = raylib-sys/raylib
-	url = https://github.com/raysan5/raylib
-	commit = "039df36f"
+	url = https://github.com/danslocombe/raylib
+	branch = raylib-rs-sys-backport
 	shallow = true
