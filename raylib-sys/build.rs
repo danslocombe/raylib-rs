@@ -37,10 +37,10 @@ impl bindgen::callbacks::ParseCallbacks for IgnoreMacros {
         }
     }
 }
-#[cfg(feature = "nobuild")]
-fn build_with_cmake(_src_path: &str) {}
+// #[cfg(feature = "nobuild")]
+// fn build_with_cmake(_src_path: &str) {}
 
-#[cfg(not(feature = "nobuild"))]
+// #[cfg(not(feature = "nobuild"))]
 fn build_with_cmake(src_path: &str) {
     // CMake uses different lib directories on different systems.
     // I do not know how CMake determines what directory to use,
@@ -62,7 +62,7 @@ fn build_with_cmake(src_path: &str) {
 
     let mut conf = cmake::Config::new(src_path);
     let mut builder;
-    let mut profile = "";
+    let profile;
     #[cfg(debug_assertions)]
     {
         builder = conf.profile("Debug");
@@ -326,10 +326,10 @@ fn gen_rgui() {
     }
 }
 
-#[cfg(feature = "nobuild")]
-fn link(_platform: Platform, _platform_os: PlatformOS) {}
+// #[cfg(feature = "nobuild")]
+// fn link(_platform: Platform, _platform_os: PlatformOS) {}
 
-#[cfg(not(feature = "nobuild"))]
+// #[cfg(not(feature = "nobuild"))]
 fn link(platform: Platform, platform_os: PlatformOS) {
     match platform_os {
         PlatformOS::Windows => {
