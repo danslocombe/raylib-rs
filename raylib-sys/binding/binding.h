@@ -1,6 +1,7 @@
 #include "raygui.h"
 #include "../raylib/src/rlgl.h"
 #include "utils_log.h"
+#include "pbo_readback.h"
 
 typedef enum
 {

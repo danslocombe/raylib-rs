@@ -326,6 +326,21 @@ fn gen_rgui() {
     }
 }
 
+// Compile the async PBO texture-readback helper (binding/pbo_readback.c) as its
+// own C static lib. Kept separate from gen_rgui()'s C++ unit so it is
+// unambiguously compiled as C; it links against the glad function pointers
+// defined in raylib's rlgl translation unit.
+fn gen_pbo_readback() {
+    println!("cargo:rerun-if-changed=binding/pbo_readback.c");
+    println!("cargo:rerun-if-changed=binding/pbo_readback.h");
+    cc::Build::new()
+        .file("binding/pbo_readback.c")
+        .include("binding")
+        .warnings(false)
+        .extra_warnings(false)
+        .compile("pbo_readback");
+}
+
 // #[cfg(feature = "nobuild")]
 // fn link(_platform: Platform, _platform_os: PlatformOS) {}
 
@@ -410,6 +425,8 @@ fn main() {
     link(platform, platform_os);
 
     gen_rgui();
+
+    gen_pbo_readback();
 }
 
 #[must_use]
